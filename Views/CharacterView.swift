@@ -41,6 +41,11 @@ struct CharacterView: View {
                                 .font(.headline)
                         }
                         .padding(.vertical, 4)
+                        .onAppear {
+                            if character == viewModel.characters.last {
+                                viewModel.fetchCharacters()
+                            }
+                        }
                     }
                     .listStyle(.plain)
                 }
@@ -48,8 +53,11 @@ struct CharacterView: View {
             .navigationTitle("Rick & Morty")
         }
         .onAppear {
-            viewModel.fetchCharacters()
+            if viewModel.characters.isEmpty {
+                viewModel.fetchCharacters()
+            }
         }
     }
 }
+
 
