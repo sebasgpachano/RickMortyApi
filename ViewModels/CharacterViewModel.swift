@@ -5,7 +5,7 @@
 import Foundation
 
 final class CharacterViewModel: ObservableObject {
-    @Published var characters: [Character] = []
+    @Published var characters: [CharacterModel] = []
     @Published var isLoading = false
     @Published var errorMessage: String?
 
@@ -19,8 +19,8 @@ final class CharacterViewModel: ObservableObject {
             DispatchQueue.main.async {
                 self?.isLoading = false
                 switch result {
-                case .success(let characters):
-                    self?.characters = characters
+                case .success(let response):
+                    self?.characters = response.results
                 case .failure(let error):
                     self?.errorMessage = error.localizedDescription
                 }

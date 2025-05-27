@@ -5,8 +5,8 @@
 import Foundation
 import Combine
 
-final class CharacterDetailViewModel: ObservableObject {
-    @Published var character: Character?
+final class DetailsViewModel: ObservableObject {
+    @Published var character: DetailsModel?
     @Published var isLoading = false
     @Published var errorMessage: String?
 
