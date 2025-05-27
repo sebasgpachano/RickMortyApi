@@ -1,9 +1,6 @@
 //
 //  CharacterModel.swift
-//  RickMortyApi
-//
-//  Created by Isabella Garcia on 26/5/25.
-//
+//  RickMortyApp
 
 import Foundation
 
