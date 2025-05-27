@@ -26,21 +26,23 @@ struct CharacterView: View {
                     }
                 } else {
                     List(viewModel.characters, id: \.id) { character in
-                        HStack(spacing: 16) {
-                            AsyncImage(url: URL(string: character.image)) { image in
-                                image
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                            } placeholder: {
-                                ProgressView()
-                            }
-                            .frame(width: 60, height: 60)
-                            .clipShape(Circle())
+                        NavigationLink(destination: DetailsView(characterId: character.id)) {
+                            HStack(spacing: 16) {
+                                AsyncImage(url: URL(string: character.image)) { image in
+                                    image
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                } placeholder: {
+                                    ProgressView()
+                                }
+                                .frame(width: 60, height: 60)
+                                .clipShape(Circle())
 
-                            Text(character.name)
-                                .font(.headline)
+                                Text(character.name)
+                                    .font(.headline)
+                            }
+                            .padding(.vertical, 4)
                         }
-                        .padding(.vertical, 4)
                         .onAppear {
                             if character == viewModel.characters.last {
                                 viewModel.fetchCharacters()

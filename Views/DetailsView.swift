@@ -4,7 +4,7 @@
 
 import SwiftUI
 
-struct CharacterDetailView: View {
+struct DetailsView: View {
     @StateObject private var viewModel = DetailsViewModel()
     let characterId: Int
 
