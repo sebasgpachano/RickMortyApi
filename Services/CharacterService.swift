@@ -1,9 +1,6 @@
 //
 //  CharacterService.swift
 //  RickMortyApi
-//
-//  Created by Isabella Garcia on 27/5/25.
-//
 
 import Foundation
 
@@ -35,7 +32,7 @@ struct CharacterService {
         }.resume()
     }
     
-    func fetchCharacterDetail(id: Int, completion: @escaping (Result<Character, Error>) -> Void) {
+    func fetchCharacterDetail(id: Int, completion: @escaping (Result<DetailsModel, Error>) -> Void) {
         let urlString = "https://rickandmortyapi.com/api/character/\(id)"
         guard let url = URL(string: urlString) else {
             completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "URL inválida"])))
@@ -54,7 +51,7 @@ struct CharacterService {
             }
 
             do {
-                let character = try JSONDecoder().decode(Character.self, from: data)
+                let character = try JSONDecoder().decode(DetailsModel.self, from: data)
                 completion(.success(character))
             } catch {
                 completion(.failure(error))
