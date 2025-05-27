@@ -5,7 +5,7 @@
 import Foundation
 
 @MainActor
-final class CharacterListViewModel: ObservableObject {
+final class CharacterViewModel: ObservableObject {
     @Published var characters: [Character] = []
     @Published var isLoading: Bool = false
     @Published var errorMessage: String? = nil

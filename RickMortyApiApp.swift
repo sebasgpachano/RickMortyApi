@@ -8,7 +8,7 @@ import SwiftUI
 struct RickMortyApiApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            CharacterView()
         }
     }
 }
