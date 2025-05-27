@@ -7,37 +7,28 @@
 
 import Foundation
 
-final class CharacterService: CharacterServiceProtocol {
-    private let session: URLSession
-
-    init() {
-        let delegate = PinnedSessionDelegate()
-        self.session = URLSession(configuration: .default, delegate: delegate, delegateQueue: nil)
-    }
-
+struct CharacterService {
     func fetchCharacters(completion: @escaping (Result<[Character], Error>) -> Void) {
-        guard let url = URL(string: "https://rickandmortyapi.com/api/character") else {
-            completion(.failure(NSError(domain: "Invalid URL", code: 0)))
-            return
-        }
-
-        session.dataTask(with: url) { data, _, error in
+        let url = URL(string: "https://rickandmortyapi.com/api/character")!
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
                 completion(.failure(error))
                 return
             }
 
             guard let data = data else {
-                completion(.failure(NSError(domain: "No data", code: 0)))
+                completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No data"])))
                 return
             }
 
             do {
-                let decoded = try JSONDecoder().decode(CharacterResponse.self, from: data)
-                completion(.success(decoded.results))
+                let response = try JSONDecoder().decode(CharacterResponse.self, from: data)
+                completion(.success(response.results))
             } catch {
                 completion(.failure(error))
             }
         }.resume()
     }
 }
+

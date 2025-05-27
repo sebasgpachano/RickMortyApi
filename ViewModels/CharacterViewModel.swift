@@ -4,34 +4,28 @@
 
 import Foundation
 
-@MainActor
 final class CharacterViewModel: ObservableObject {
     @Published var characters: [Character] = []
-    @Published var isLoading: Bool = false
-    @Published var errorMessage: String? = nil
+    @Published var isLoading = false
+    @Published var errorMessage: String?
 
-    private let characterService: CharacterServiceProtocol
-
-    init(characterService: CharacterServiceProtocol = CharacterService()) {
-        self.characterService = characterService
-    }
+    private let service = CharacterService()
 
     func fetchCharacters() {
         isLoading = true
         errorMessage = nil
 
-        characterService.fetchCharacters { [weak self] result in
-            guard let self = self else { return }
-
-            Task {
-                self.isLoading = false
+        service.fetchCharacters { [weak self] result in
+            DispatchQueue.main.async {
+                self?.isLoading = false
                 switch result {
                 case .success(let characters):
-                    self.characters = characters
+                    self?.characters = characters
                 case .failure(let error):
-                    self.errorMessage = error.localizedDescription
+                    self?.errorMessage = error.localizedDescription
                 }
             }
         }
     }
 }
+
