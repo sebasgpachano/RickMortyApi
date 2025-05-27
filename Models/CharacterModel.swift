@@ -4,11 +4,7 @@
 
 import Foundation
 
-struct CharacterResponse: Codable {
-    let results: [Character]
-}
-
-struct Character: Codable, Identifiable {
+struct CharacterModel: Codable, Identifiable {
     let id: Int
     let name: String
     let image: String
