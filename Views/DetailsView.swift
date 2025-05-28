@@ -47,7 +47,6 @@ struct DetailsView: View {
             }
         }
         .onAppear {
-            print("Character ID:", characterId)
             viewModel.fetchCharacter(id: characterId)
         }
         .navigationTitle("Detalle")

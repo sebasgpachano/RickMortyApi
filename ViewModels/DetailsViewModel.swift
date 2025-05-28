@@ -21,7 +21,6 @@ final class DetailsViewModel: ObservableObject {
                 self?.isLoading = false
                 switch result {
                 case .success(let character):
-                    print("Character cargado:", character)
                     self?.character = character
                 case .failure(let error):
                     self?.errorMessage = error.localizedDescription
