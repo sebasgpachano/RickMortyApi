@@ -16,7 +16,6 @@ final class CharacterViewModel: ObservableObject {
     private var isFetching = false
 
     func fetchCharacters() {
-        // ⚠️ Evitar múltiples llamadas simultáneas
         guard !isFetching, currentPage <= totalPages else { return }
 
         isLoading = true
