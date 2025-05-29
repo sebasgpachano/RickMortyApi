@@ -1,0 +1,1 @@
+An iOS application developed in SwiftUI that displays characters from the Rick and Morty API. It allows users to explore characters with infinite scrolling, view individual details, and includes security mechanisms such as SSL pinning. The architecture is based on MVVM.
